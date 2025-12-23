@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smarter Resume Builder - AI-Powered Resume Creation</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                </svg>
+                <span class="text-white text-xl font-bold">ResumeAI</span>
+            </div>
+            <div class="space-x-4">
+                <a href="login.html" class="text-white hover:text-cyan-200 transition">Login</a>
+                <a href="register.html" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-cyan-100 transition font-semibold">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-20 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
+                Build Your Perfect Resume
+                <span class="block text-cyan-200">with AI Power</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white/90 mb-8 animate-slide-up">
+                Create ATS-friendly resumes that get you noticed. AI-powered suggestions, 
+                multiple templates, and instant PDF export.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay">
+                <a href="register.html" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-cyan-100 transition transform hover:scale-105 shadow-xl">
+                    Start Building Free
+                </a>
+                <a href="login.html" class="bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/30 transition border border-white/30">
+                    Sign In
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mt-20 max-w-5xl mx-auto">
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 hover:bg-white/20 transition transform hover:scale-105">
+                <div class="text-4xl mb-4">🤖</div>
+                <h3 class="text-xl font-bold text-white mb-2">AI-Powered Suggestions</h3>
+                <p class="text-white/80">Get intelligent recommendations to improve your resume content and ATS compatibility.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 hover:bg-white/20 transition transform hover:scale-105">
+                <div class="text-4xl mb-4">📄</div>
+                <h3 class="text-xl font-bold text-white mb-2">ATS-Friendly Templates</h3>
+                <p class="text-white/80">Choose from multiple professional templates designed to pass ATS systems.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 hover:bg-white/20 transition transform hover:scale-105">
+                <div class="text-4xl mb-4">⚡</div>
+                <h3 class="text-xl font-bold text-white mb-2">Instant PDF Export</h3>
+                <p class="text-white/80">Download your resume as a clean, professional PDF in one click.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">Built With Modern Technology</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">HTML5</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">Tailwind CSS</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">JavaScript ES6+</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">Node.js</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">Express.js</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">OpenAI API</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20">
+                    <span class="text-white font-semibold">JWT Auth</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+

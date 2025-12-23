@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - ResumeAI</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-blue-600 dark:text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                </svg>
+                <span class="text-xl font-bold text-gray-800 dark:text-white">ResumeAI</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                    <svg id="sunIcon" class="w-6 h-6 text-gray-600 dark:text-gray-300 hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                    <svg id="moonIcon" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+                <button id="exportBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-semibold">
+                    Export PDF
+                </button>
+                <button id="logoutBtn" class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="grid lg:grid-cols-2 gap-6">
+            <!-- Form Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Resume Builder</h2>
+                
+                <!-- Template Selector -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Template</label>
+                    <select id="templateSelect" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="minimal">Minimal</option>
+                        <option value="modern">Modern</option>
+                        <option value="corporate">Corporate</option>
+                        <option value="creative">Clean Creative</option>
+                    </select>
+                </div>
+
+                <!-- Step Navigation -->
+                <div class="flex space-x-2 mb-6 overflow-x-auto">
+                    <button class="step-btn active px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium" data-step="personal">Personal</button>
+                    <button class="step-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium" data-step="summary">Summary</button>
+                    <button class="step-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium" data-step="skills">Skills</button>
+                    <button class="step-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium" data-step="experience">Experience</button>
+                    <button class="step-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium" data-step="education">Education</button>
+                    <button class="step-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium" data-step="projects">Projects</button>
+                    <button class="step-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium" data-step="certifications">Certifications</button>
+                </div>
+
+                <!-- Form Steps -->
+                <div id="formSteps" class="space-y-6">
+                    <!-- Personal Info Step -->
+                    <div id="step-personal" class="step-content">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Personal Information</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+                                <input type="text" id="fullName" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 mb-2">Phone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 mb-2">Location</label>
+                                <input type="text" id="location" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 mb-2">LinkedIn (optional)</label>
+                                <input type="url" id="linkedin" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Step -->
+                    <div id="step-summary" class="step-content hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Professional Summary</h3>
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 mb-2">Summary</label>
+                            <textarea id="summary" rows="5" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white"></textarea>
+                            <button type="button" class="mt-2 text-blue-600 dark:text-cyan-400 hover:underline text-sm" onclick="getAISuggestion('summary', 'summary')">Get AI Suggestion</button>
+                        </div>
+                    </div>
+
+                    <!-- Skills Step -->
+                    <div id="step-skills" class="step-content hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Skills</h3>
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 mb-2">Add Skills (comma-separated)</label>
+                            <input type="text" id="skillsInput" placeholder="JavaScript, React, Node.js" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                            <button type="button" onclick="addSkills()" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Skills</button>
+                            <div id="skillsList" class="mt-4 flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Step -->
+                    <div id="step-experience" class="step-content hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Work Experience</h3>
+                        <div id="experienceList" class="space-y-4 mb-4"></div>
+                        <button type="button" onclick="addExperience()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Experience</button>
+                    </div>
+
+                    <!-- Education Step -->
+                    <div id="step-education" class="step-content hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Education</h3>
+                        <div id="educationList" class="space-y-4 mb-4"></div>
+                        <button type="button" onclick="addEducation()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Education</button>
+                    </div>
+
+                    <!-- Projects Step -->
+                    <div id="step-projects" class="step-content hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Projects</h3>
+                        <div id="projectsList" class="space-y-4 mb-4"></div>
+                        <button type="button" onclick="addProject()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Project</button>
+                    </div>
+
+                    <!-- Certifications Step -->
+                    <div id="step-certifications" class="step-content hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Certifications</h3>
+                        <div id="certificationsList" class="space-y-4 mb-4"></div>
+                        <button type="button" onclick="addCertification()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Certification</button>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <button onclick="saveResume()" class="mt-6 w-full bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition font-semibold">
+                    Save Resume
+                </button>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-20">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Live Preview</h2>
+                </div>
+                <div id="resumePreview" class="bg-white border border-gray-300 rounded-lg p-6 min-h-[800px] overflow-auto">
+                    <!-- Preview content will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Suggestion Modal -->
+    <div id="aiModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-auto">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">AI Suggestion</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Original</label>
+                    <div id="aiOriginal" class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-800 dark:text-gray-200"></div>
+                </div>
+                <div>
+                    <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">AI Suggestion</label>
+                    <div id="aiSuggestion" class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-gray-800 dark:text-gray-200"></div>
+                </div>
+                <div class="flex space-x-4">
+                    <button onclick="acceptAISuggestion()" class="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Accept</button>
+                    <button onclick="rejectAISuggestion()" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white px-4 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/pdf.js"></script>
+</body>
+</html>
+
