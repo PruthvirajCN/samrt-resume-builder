@@ -223,6 +223,8 @@ For issues or questions, please open an issue on the repository.
 
 **Built with ❤️ for students and job seekers**  
 
-![Uploading Screenshot 2025-12-23 091643.png…]()<img width="1920" height="1080" alt="Screenshot 2025-12-23 091655" src="https://github.com/user-attachments/assets/2c4ddf91-d8db-4ea5-bac2-f0bced6b35d8" />
+<img width="1920" height="1080" alt="Screenshot 2025-12-23 091643" src="https://github.com/user-attachments/assets/582ca6a1-dd1f-4205-a4e9-ba6a7c726acf" />
+
+<img width="1920" height="1080" alt="Screenshot 2025-12-23 091655" src="https://github.com/user-attachments/assets/2c4ddf91-d8db-4ea5-bac2-f0bced6b35d8" />
 
 <img width="1920" height="1080" alt="Screenshot 2025-12-23 091743" src="https://github.com/user-attachments/assets/9002cf85-fbd6-49d7-8328-106d179b1fe1" />
